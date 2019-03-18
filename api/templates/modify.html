@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息修改页面</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../../static/js/base.js"></script>
+    <script>
+             $(document).ready(function(){
+               $(function(){
+                 var pid = {{ pk|safe }};
+                 var purl = "/api/human/" + pid + "/";
+                 $.ajax({
+                    method: "GET",
+                    url: purl,
+                    dataType: "json",
+                    success: function(data){
+                         $('.humanName').val(data['humanName']);
+                         $('.humanAge').val(data['humanAge']);
+                    }
+                 });
+               });
+             });
+
+             function modify(){
+                 var pid = {{ pk|safe }};
+                 var purl = "/api/human/" + pid + "/";
+                 $.ajax({
+                     url: purl,
+                     method: "POST",
+                     data: $("#form1").serialize(),
+                     dataType: "json",
+                     success: function(data){
+                         alert("修改成功！");
+                         location.href = "/api/test/";
+                     },
+                     error : function() {
+                         alert("异常！");
+                     }
+                 });
+             }
+
+         function test(){
+             var pid = {{ pk|safe }};
+             var f = document.getElementsByTagName("form")[0];
+             f.action = f.action + pid + "/";
+             alert(f.action);
+             f.submit();
+         }
+    </script>
+</head>
+<body>
+       <form id="form1" method="post" action="##">
+               {%csrf_token%}
+                       <label>用户名：</label>
+                       <input class="humanName" name="humanName" type="text"><br>
+                   <br>
+                       <label>&nbsp;&nbsp;&nbsp;年龄：</label>
+                       <input class="humanAge" name="humanAge" type="text"><br>
+                   <br>
+                       <input id="btn1" type="button" value="提交" onclick="modify()"/>
+           </form>
+</body>
+</html>

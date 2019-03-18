@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>登录界面</title>
+    <script type="text/javascript" src="../../static/js/jquery-3.2.1.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("input").focus(function(){
+                $(this).css("background-color","#cccccc");
+            });
+
+            $("input").blur(function(){
+                $(this).css("background-color","#ffffff");
+            });
+
+            $("#signForm").validate({
+                rules: {
+                    username: {
+                        required: true,
+                        minlength: 2
+                    },
+                    password: {
+                        required: true,
+                        minlength: 3
+                    }
+                },
+                messages: {
+                    username: {
+                        required: " (请输入用户名)",
+                        minlength: " (用户名长度不能小于2)"
+                    },
+                    password: {
+                        required: " (请输入密码)",
+                        minlength: " (密码长度不能小于3)"
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="container" style="width:600px;height:400px;">
+       <div id="header" style="background-color:#FFA500;">
+           <h1 style="margin-bottom:0;"><img src="../../static/images/header.jpg" alt="header image" width="600" height="80"></h1>
+       </div>
+
+       <div id="content" style="background-color:#EEEEEE;height:300px;width:600px;text-align:center;">
+           <form id="signForm" method="post" action="/app2/login/" style="padding-top:80px">
+               {%csrf_token%}
+                       <label>用户名：</label>
+                       <input id="username" name="username" type="text"><br>
+                   <br>
+                       <label>&nbsp;&nbsp;&nbsp;密码：</label>
+                       <input id="password" name="password" type="text"><br>
+                   <br>
+                       <input name="submit" type="submit" value="提交" />
+           </form>
+           {% if msg %}
+               <script>
+                   var msg = {{ msg|safe }}
+                   alert(msg)
+               </script>
+           {% endif %}
+       </div>
+
+       <div id="footer" style="background-color:#FFA500;clear:both;text-align:center;">
+          版权 © runoob.com
+       </div>
+
+   </div>
+</body>
+</html>

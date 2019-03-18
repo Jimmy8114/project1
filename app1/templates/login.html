@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆页面</title>
+</head>
+<body>
+{% load staticfiles %}
+<div id="oauth_button">
+    <div class="pull-right">
+        <span>其他账号登录：</span>
+        <a href="{% url 'app1:git_login' %}"><img class="type" src="{% static 'images/github.png' %}" alt="GITHUB" /></a> 
+        <a href="{% url 'app1:qq_login' %}"><img class="type" src="{% static 'images/QQ.png' %}" alt="QQ" /></a> 
+    </div>
+</div>
+
+</body>
+</html>

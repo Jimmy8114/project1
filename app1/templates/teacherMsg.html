@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>teacherMsg</title>
+</head>
+<body>
+  <form method="post" action="/app1/addTeacher/">
+     {%csrf_token%}
+      <label>用户名：</label>
+      <input name="name" type="text"><br>
+      <label>年龄：</label>
+      <input name="age" type="text"><br>
+      <label>地址：</label>
+      <input name="address" type="text"><br>
+      <input name="submit" type="submit" value="提交" /><br>
+  </form>
+</body>
+</html>

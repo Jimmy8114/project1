@@ -1,0 +1,62 @@
+<head>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../../static/js/common.js"></script>
+    <script>
+        $(document).ready(function(){
+           $("#btn1").click(function(){
+               var pageNum = document.getElementById("pageNum").value;
+               location.href = '?page=' + pageNum;
+           });
+        });
+    </script>
+<style>
+    .tablecss{
+        margin-left:40px;
+        height:25px;
+	    line-height:150%;
+    }
+
+    .trcss{
+        width:120px;
+    }
+</style>
+</head>
+
+
+{% extends "common/base.html"  %}
+{% block index %}
+        <p>以下是今年新款电脑</p>
+
+        <table border="1" cellspacing="0" cellpadding="4" class="tablecss">
+           <tr class="trcss">
+              <th bgcolor="#cccccc">牌子</th>
+              <th bgcolor="#cccccc">价格</th>
+           </tr>
+           {% for computer in computers %}
+             <tr class="trcss">
+                 <td>{{ computer.computerName }}</td>
+                 <td>{{ computer.price }}</td>
+             </tr>
+            {% endfor %}
+         </table>
+
+         <div style="text-align:center;margin-top:16px;">
+             <span >
+                 {% if computers.has_previous %}
+                     <a href="?page={{computers.previous_page_number}}">previous</a>
+                 {% endif %}
+
+                 <span class="=current">
+                    &nbsp; Page {{ computers.number }} of &nbsp;{{ computers.paginator.num_pages }}&nbsp;
+                 </span>
+
+                 {% if computers.has_next %}
+                     <a href="?page={{computers.next_page_number}}">next</a>
+                 {% endif %}&nbsp;
+
+                 To: &nbsp; <input id="pageNum" type="text" style="width:30px">&nbsp;<button id="btn1">Go</button>
+
+             </span>
+         </div>
+
+{% endblock index %}

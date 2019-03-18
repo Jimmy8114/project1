@@ -1,0 +1,8 @@
+{% extends "common/base.html"  %}
+{% block index %}
+    <p>以下是今年新款手机</p>
+    {% for iphone in iphones %}
+       <p>牌子：{{iphone.name}}</p>
+       <p>价格：{{iphone.price}}</p>
+    {% endfor %}
+{% endblock index %}

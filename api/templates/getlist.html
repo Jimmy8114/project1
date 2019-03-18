@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>rest framework API</title>
+    <script type="text/javascript" src="../../static/js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="../../static/js/base.js"></script>
+    <script type="text/javascript">
+
+        function onDelete(purl,pid){
+            purl = purl + pid + "/";
+            $.ajax({
+               url: purl ,
+               method: "DELETE",
+               dataType: "json",
+               success: function(data){
+                      alert("第"+ pid + "条记录删除成功！");
+                      location.href = "/api/test/";
+               }
+            });
+         }
+
+        function onNew(){
+            location.href = "/api/create/";
+        }
+
+        $(document).ready(function(){
+            $(function(){
+               $.ajax({
+                 method: "GET",
+                 url: "/api/getlist/",
+                 dataType: "json",
+                 success: function(data) {
+                     for (i=0;i<data.length;i++){
+                        var Str = 'onclick="onDelete(\'/api/human/\',' + data[i]['id'] + ')"';
+                        $("#human-table-body").append(
+                           ' <tr>\n' +
+                           '   <th scope="col">' + data[i]['id'] + '</th>\n' +
+                           '   <th scope="col">' + data[i]['humanName'] + '</th>\n' +
+                           '   <th scope="col">' + data[i]['humanAge'] + '</th>\n' +
+                           '   <th scope="col"> <a href="/api/modify/' + data[i]['id'] + '/">编辑</a>\n' + '</th>\n' +
+                           '   <th scope="col"> <button ' + Str + ' >删除</button>\n' + '</th>\n' +
+                           ' </tr>'
+                        )
+                     }
+                 }
+               });
+            });
+         });
+
+    </script>
+</head>
+<body>
+    <table id="human-table-body" border="1" cellspacing="0" cellpadding="4">
+       <tr>
+           <th>编号</th>
+           <th>姓名</th>
+           <th>年龄</th>
+           <th>修改</th>
+           <th>删除</th>
+       </tr>
+    </table>
+    <br><br>
+    <button id="btn" type="button" onclick="onNew()">新增</button>
+</body>
+</html>

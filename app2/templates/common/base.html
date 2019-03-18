@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="../../static/css/style.css" type="text/css">
+    <script type="text/javascript" src="../../static/js/common.js"></script>
+    <script>
+        function myFunction3(){
+               location.href = "{% url 'app2:computer' %}";
+        }
+
+        function myFunction4(){
+                location.href = "{% url 'app2:iphone' %}";
+        }
+    </script>
+</head>
+<body>
+   <div id="container" style="width:600px;height:400px;">
+       <div id="header" style="background-color:#FFA500;">
+           <h1 style="margin-bottom:0;"><img src="../../static/images/header.jpg" alt="header image" width="600" height="80"></h1>
+       </div>
+
+       <div id="menu" style="background-color:#FFD700;height:300px;width:100px;float:left;">
+           <dl>
+               <dt class="wordStyle1" >电子产品</dt>
+               <dd class="wordStyle2" onclick="myFunction3()">- 电脑</dd>
+               <dd class="wordStyle2" onclick="myFunction4()">- 手机</dd>
+               <dd class="wordStyle2">- 相机</dd>
+               <dt class="wordStyle1">农副产品</dt>
+               <dd class="wordStyle2">- 花生油</dd>
+               <dd class="wordStyle2">- 蔬菜</dd>
+               <dd class="wordStyle2">- 肉类</dd>
+           </dl>
+       </div>
+
+       <div id="content" style="background-color:#EEEEEE;height:300px;width:500px;float:left;">
+           {% block index %}
+              内容在这里
+           {% endblock index %}
+       </div>
+
+       <div id="footer" style="background-color:#FFA500;clear:both;text-align:center;">
+          版权 © runoob.com
+       </div>
+
+   </div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+.wordStyle1{
+   font-weight: bold;
+   font-family: "SimHei";
+   font-size: 12px;
+   line-height: 16px;
+}
+
+.wordStyle2{
+   font-family: "SimHei";
+   font-size: 11px;
+   line-height: 15px;
+}
+
+.tablecss{ margin-left:40px;}
+
