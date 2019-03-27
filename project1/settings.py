@@ -174,13 +174,13 @@ GITHUB_APP_ID = '4ed0674a23223f72a936'
 
 GITHUB_KEY = '7b6af836aaaf2fe1253ffc6417aa06e95de8f55c'
 
-GITHUB_CALLBACK_URL = 'http://127.0.0.1:8000/app1/git_check'  #填写你的回调地址
+GITHUB_CALLBACK_URL = 'http://127.0.0.1:80/app1/git_check'  #填写你的回调地址
 
 #QQ
 QQ_APP_ID = ''
 
 QQ_KEY = ''
 
-QQ_CALLBACK_URL = 'http://127.0.0.1:8000/app1/qq_check'    #填写你的回调地址
+QQ_CALLBACK_URL = 'http://127.0.0.1:80/app1/qq_check'    #填写你的回调地址
 
 

@@ -1,0 +1,131 @@
+<head>
+    <style type="text/css">
+        th{
+           padding:2px 4px;
+           font-size:13px;
+        }
+        td{
+           padding:2px 4px;
+           font-size:13px;
+        }
+    </style>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+       $(document).ready(function(){
+          $(function(){
+              var canvas = document.getElementById('tutorial');
+              if(!canvas.getContext) return;
+              var ctx = canvas.getContext("2d");
+              ctx.fillStyle = "rgb(200,0,0)";
+              ctx.fillRect (10, 10, 55, 50);
+              ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+              ctx.fillRect (30, 30, 55, 50);
+              //绘制路径
+              ctx.beginPath();
+              ctx.moveTo(100,100);
+              ctx.lineTo(250,150);
+              ctx.closePath();
+              ctx.stroke();
+          });
+
+          $("#btn").click(function(){
+             var year = document.getElementById("yearSelect").value;
+             var province = document.getElementById("areaSelect").value;
+
+             $.ajax({
+                 method: "get",
+                 url: "/app2/profit/",
+                 dataType: "json",
+                 data:{'year':year,'province':province},
+                 success: function(data) {
+                    $("#tb1 tbody").html("");
+                    for (i=0;i<data.length;i++){
+                      $("#tb1 tbody").append(
+                           ' <tr>\n' +
+                           '   <th scope="col">' + data[i]['city'] + '</th>\n' +
+                           '   <th scope="col">' + data[i]['income'] + '</th>\n' +
+                           '   <th scope="col">' + data[i]['incomePer'] + '</th>\n' +
+                           '   <th scope="col">' + data[i]['netIncome'] + '</th>\n' +
+                           '   <th scope="col">' + data[i]['netIncomePer'] + '</th>\n' +
+                           ' </tr>'
+                      )
+                    }
+                 }
+             });
+          });
+       });
+
+       function draw(){
+          var canvas = document.getElementById('tutorial');
+          if(!canvas.getContext) return;
+          var ctx = canvas.getContext("2d");
+          ctx.fillStyle = "rgb(200,0,0)";
+          ctx.fillRect (10, 10, 55, 50);
+
+          ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+          ctx.fillRect (30, 30, 55, 50);
+       }
+    </script>
+
+</head>
+
+{% extends "common/base2.html" %}
+{% block index %}
+
+<div style="padding-top:30px;float:left;">
+    <section  style="width:330px;height:70px;background-color:#FAEBD7;margin-left:40px;text-align:center;padding-top:20px;">公司简介
+    </section>
+
+    <section  style="width:330px;height:380px;background-color:#FAEBD7;margin-left:40px;margin-top:2px;">
+    </section>
+</div>
+
+<div style="padding-top:30px;float:left;">
+    <section  style="width:330px;height:70px;background-color:#FAEBD7;margin-left:40px;text-align:center;padding-top:20px;">公司营收表
+    </section>
+
+    <section  style="width:330px;height:380px;background-color:#FAEBD7;margin-left:40px;margin-top:2px;">
+        <div style="height:50px;padding-top:13px;padding-left:25px;float:left;">
+
+            <select id="yearSelect" style="font-size:13px;">
+                <option value="2017">2017年</option>
+                <option value="2018">2018年</option>
+                <option value="2019">2019年</option>
+            </select>
+
+            <select id="areaSelect" style="margin-left:40px;font-size:13px;">
+                {% for p in province %}
+                <option value={{ p }}>{{ p }}</option>
+                {% endfor %}
+            </select>
+
+            <button id="btn" style="margin-left:40px;margin-bottom:20px;font-size:13px;">
+                查询
+            </button>
+        </div>
+
+        <div style="height:300px;padding-top:15px;padding-left:15px;float:left;">
+            <table id="tb1" border="1" cellspacing="0">
+                <thead>
+                   <tr>
+                    <th>地区</th>
+                    <th>营业收入</th>
+                    <th>同比增长</th>
+                    <th>净利润</th>
+                    <th>同比增长</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<div style="margin-top:510px;margin-bottom:20px;">
+    <section style="width:700px;height:300px;background-color:#FAEBD7;margin-left:40px;" onclick="draw()">
+        <canvas id="tutorial" width="300" height="200" style="border:1px solid black;margin-left:30px;margin-top:30px;"></canvas>
+    </section>
+</div>
+
+
+{% endblock index %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from app2.models import *
 import json
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
@@ -45,3 +45,22 @@ def login(request):
         else:
             msg = "用户名/密码错误，请重新输入！"
             return render(request, 'login2.html', {'msg': json.dumps(msg)})   #这个msg是传递给js的，需要经过json.dumps处理
+
+
+#前台设计学习
+def tobase(request):
+    return render(request,'common/base2.html')
+
+def company(request):
+    province = ['广东省','福建省','浙江省']
+    return render(request,'company.html',{'province':province})
+
+from rest_framework.response import Response
+
+def profit(request):
+    province = ['广东省', '福建省', '浙江省']
+    pyear = request.GET.get("year")
+    pprovince = request.GET.get("province")
+    profitList = [{"year":"2017","province":"广东省","city":"广州市","income":20135,"incomePer":0.08,"netIncome":14562,"netIncomePer":0.09},{"year":"2017","province":"广东省","city":"深圳市","income":20635,"incomePer":0.11,"netIncome":15262,"netIncomePer":0.13},{"year":"2017","province":"福建省","city":"福州市","income":9200,"incomePer":0.05,"netIncome":6800,"netIncomePer":0.07}]
+    profits = [i for i in profitList if i["year"]==pyear and i["province"]==pprovince]
+    return HttpResponse(json.dumps(profits)) #render(request,'company.html',{'profit':profit,'province':province})

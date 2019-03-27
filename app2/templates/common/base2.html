@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <title>商城首页</title>
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../../static/css/bootstrap-grid.min.css" type="text/css">
+    <link rel="stylesheet" href="../../static/css/AdminLTE.min.css" type="text/css">
+    <link rel="stylesheet" href="../../static/css/font-awesome.min.css" type="text/css">
+    <script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/js/bootstrap.min.js"></script>
+    <script src="../../static/js/adminlte.min.js"></script>
+    <style type="text/css">
+       .ul1{
+           display:block;
+           list-style:none;
+           float: left;
+           text-align: left;
+           margin-top: 10px;
+           margin-left: -35px;
+       }
+       .ul2{
+           float: left;
+           display:none;
+           font-size:14px;
+           margin-left: -25px;
+       }
+       .nav{
+           height:76px;
+           width:200px;
+           float:left;
+           list-style:none;
+           background-color:#FFD700;
+           padding-left:40px;
+       }
+
+       .li31:hover .ul31{
+            display:block;
+       }
+       .li32:hover .ul32{
+            display:block;
+       }
+
+       .ul31 {
+            list-style:none;
+            display: none;
+            background-color: #f9f9f9;
+            min-width: 80px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding-left: 7px;
+            font-size:13px;
+       }
+       .ul32 {
+            list-style:none;
+            display: none;
+            background-color: #f9f9f9;
+            min-width: 90px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding-left: 7px;
+            font-size:13px;
+       }
+    </style>
+
+    <script>
+      $(document).ready(function(){
+          $(".li1").click(function(){
+             $(".ul2").toggle();
+          });
+      });
+    </script>
+</head>
+<body>
+<div id="container" style="width:1200px;height:800px">
+   <header>
+      <div class="logo" style="width:600px;display:inline;"><img src="../../static/images/header.jpg" style="float:left;"></div>
+       <div class="caidan" style="width:600px;display:inline;">
+           <ul class="nav">
+               <li class="li31" style="padding-top:30px;"><a href="##" style="text-align:center;">公司概况</a>
+                   <div>
+                       <div style="float:left;">
+                           <ul class="ul31">
+                              <li><a href="##">经营状况</a></li>
+                              <li><a href="##">公司大事</a></li>
+                          </ul>
+                       </div>
+                       <div style="float:left;">
+                           <ul class="ul31">
+                              <li><a href="##">公司法律</a></li>
+                              <li><a href="##">人事变动</a></li>
+                           </ul>
+                       </div>
+                   </div>
+               </li>
+           </ul>
+           <ul class="nav">
+               <li class="li32" style="padding-top:30px"><a href="##">公司股东</a>
+                   <ul class="ul32">
+                       <li><a href="##">股东持股</a></li>
+                       <li><a href="##">股东变动</a></li>
+                   </ul>
+               </li>
+           </ul>
+           <ul class="nav">
+               <li class="li33" style="padding-top:30px"><a href="##">公司财务</a>
+               </li>
+           </ul>
+       </div>
+   </header>
+
+    <aside  style="width:100px;height:523px;background-color:#FFD700;float:left;">
+        <section id="menu-box" class="sidebar" style="height:200px;">
+           <ul class="ul1">
+               <li class="li1">
+                  <a href="#">公司治理</a>
+                   <ul class="ul2" style="display:none;font-size:14px;color:black">
+                       <li><a href="##">实际控制人</a></li>
+                       <li><a href="##">管理层</a></li>
+                       <li><a href="##">独立董事</a></li>
+                   </ul>
+               </li>
+               <li>
+                  <a href="#">公司规划</a>
+               </li>
+           </ul>
+        </section>
+    </aside>
+
+    <div id="content" style="width:1100px;height:523px;overflow-y:scroll;">
+           {% block index %}
+              内容在这里
+           {% endblock index %}
+    </div>
+
+    <div id="footer" style="background-color:#FFA500;clear:both;text-align:center;">
+          版权 © chenhy.gzs.com
+    </div>
+</div>
+
+</body>
+</html>

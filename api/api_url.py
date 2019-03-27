@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'demo/',views.demotest, name='demo'),
     url(r'^modify/(?P<pk>[0-9]+)/$', views.modify, name='modify'),
     url(r'create/',views.create, name='create'),
+    url(r'weixin/',views.weixin_main, name='weixin'),
 ]
